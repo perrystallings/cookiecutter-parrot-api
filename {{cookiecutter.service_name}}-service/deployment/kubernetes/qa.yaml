@@ -1,0 +1,17 @@
+global:
+  name: {{cookiecutter.service_name}}
+  containerName: {{cookiecutter.service_name}}-service
+  env: qa
+
+web:
+  minReplicas: 2
+  maxReplicas: 12
+  volumeSize: "1G"
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: "512m"
+    limits:
+      memory: "2Gi"
+      cpu: "1"
+  cpuTarget: 50

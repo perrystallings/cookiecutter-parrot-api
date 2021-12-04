@@ -1,0 +1,7 @@
+{
+  "service_name": "example",
+  "async": [
+    "false",
+    "true"
+  ]
+}

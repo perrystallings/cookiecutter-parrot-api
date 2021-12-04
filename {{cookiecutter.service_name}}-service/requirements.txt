@@ -1,0 +1,10 @@
+pytest
+gunicorn[gevent]>=20.0.4
+pytest-cov>=2.8.1
+{% if cookiecutter.async == "true" -%}
+uvloop
+pytest-aiohttp
+parrot-api-core[async]>=0.1.2
+{% else %}
+parrot-api-core>=0.1.2
+{%- endif %}

@@ -1,0 +1,4 @@
+{
+  "service_name": "{{cookiecutter.service_name}}",
+  "environment": "local"
+}

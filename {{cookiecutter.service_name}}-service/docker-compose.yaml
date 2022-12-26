@@ -10,8 +10,6 @@ services:
       - ./deployment/settings/env/:/apps/settings/env/
       - ./deployment/settings/secrets/:/apps/settings/secrets/
       - ./deployment/conf:/apps/deployment/conf/
-    environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=/apps/deployment/client.json
   test:
     build: .
     command: bash /apps/deployment/startup/test.sh
@@ -19,3 +17,8 @@ services:
       - ./deployment/settings/env:/apps/settings/env
       - ./deployment/settings/secrets:/apps/settings/secrets
       - ./deployment/settings/test:/apps/settings/test
+  locust:
+    build: .
+    depends_on:
+      - web
+    command: bash /apps/deployment/startup/locust.sh

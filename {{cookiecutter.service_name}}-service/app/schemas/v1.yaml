@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Example API
+  title: {{cookiecutter.service_name}} API
   version: 1.0.0
 servers:
   - url: /v1/
@@ -8,6 +8,13 @@ paths:
   /hello:
     get:
       operationId: parrot_api.core.server.say_hello
+      {% if cookiecutter.authentication == 'true' -%}
+      tags:
+        - Default
+      security:
+        - oauth:
+            - get:hello
+      {%- endif %}
       responses:
         200:
           description: returns what you send
@@ -15,3 +22,19 @@ paths:
             application/json:
               schema:
                 type: object
+{% if cookiecutter.authentication == 'true' -%}
+components:
+  securitySchemes:
+    oauth:
+      type: oauth2
+      description: This API uses OAuth 2 with the implicit grant flow. [More info](https://api.example.com/docs/auth)
+      {% if cookiecutter.async != 'true' -%}
+      x-tokenInfoFunc: parrot_api.core.auth.oauth.verify_token_async
+      {%- else %}
+      x-tokenInfoFunc: parrot_api.core.auth.oauth.verify_token
+      {%- endif %}
+      flows:
+        clientCredentials:
+          tokenUrl: /auth/oauth/token
+          scopes: { }
+{%- endif %}

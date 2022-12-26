@@ -3,5 +3,9 @@
   "async": [
     "false",
     "true"
+  ],
+  "authentication": [
+    "true",
+    "false"
   ]
 }

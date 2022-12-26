@@ -1,6 +1,6 @@
-FROM python:3.8.10
+FROM python:3.11-slim
 
-EXPOSE 8080 8081 443
+EXPOSE 8080
 
 RUN apt-get --assume-yes update && apt-get --assume-yes install gcc musl-dev libffi-dev bash openrc nginx git
 
@@ -21,6 +21,7 @@ RUN mkdir /apps/files && \
     mkdir /apps/settings/test
 
 RUN chmod +x /apps/deployment/startup/app.sh && \
+    chmod +x /apps/deployment/startup/locust.sh && \
     chmod +x /apps/deployment/startup/test.sh
 
 WORKDIR /apps/app
